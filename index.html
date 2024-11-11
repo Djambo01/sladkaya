@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Персональная карточка контакта</title>
+    <style>
+        /* Градиентный фон для страницы */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #13161b, #080a0c, #2b5876, #4e4376);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+        }
+
+        /* Анимация плавного переливания фона */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Карточка контакта */
+        .contact-card {
+            background-color: rgba(255, 255, 255, 0.9); /* Легкая прозрачность */
+            width: 350px;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 30px 20px;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Картинка профиля */
+        .contact-card img {
+            width: 100px;
+            height: 115px;
+            border-radius: 70%;
+            object-fit: cover;
+            margin-top: -10px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Имя и информация */
+        .contact-card h2 {
+            margin: 10px 0 5px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .contact-card p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Никнейм */
+        .contact-card .username {
+            font-size: 15px;
+            color: #888;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* Социальные кнопки */
+        .social-buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        /* Кнопка социальной сети */
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 40px;
+            border-radius: 20px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Эффект при наведении */
+        .social-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Специальные стили для каждой соцсети */
+        .social-button.vk {
+            background: linear-gradient(45deg, #4c75a3, #35759a);
+        }
+        
+        .social-button.telegram {
+            background: linear-gradient(45deg, #30a4e9, #0078b8);
+        }
+
+        .social-button.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шаблон карточки контакта -->
+    <template id="contact-card-template">
+        <div class="contact-card">
+            <img src="" alt="Фото" class="profile-pic">
+            <h2 class="name">Имя Фамилия</h2>
+            <p class="username">@username</p>
+            <p class="description">Описание</p>
+            
+            <p>Следите за мной в социальных сетях:</p>
+            <div class="social-buttons">
+                <a href="#" class="social-button vk" target="_blank">VK</a>
+                <a href="#" class="social-button telegram" target="_blank">Telegram</a>
+                <a href="#" class="social-button instagram" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </template>
+
+    <!-- Контейнер для карточки -->
+    <div id="contact-container"></div>
+
+    <script>
+        // Данные для карточки контакта
+        const contactData = {
+            name: "Мэри Алавердян",
+            username: "@m_eri27",
+            description: "Graphic Designer | Traveler | Cat Lover",
+            image: "photo_2024-11-11 16.03.54.jpeg", // замените на актуальный URL изображения
+            socialLinks: {
+                vk: "https://t.me/meriii1213",
+                telegram: "https://t.me/meriii1213",
+                instagram: "https://instagram.com/mary.mad.12"
+            }
+        };
+
+        // Получаем шаблон и контейнер
+        const template = document.getElementById("contact-card-template").content;
+        const container = document.getElementById("contact-container");
+
+        // Клонируем шаблон карточки
+        const contactCard = template.cloneNode(true);
+
+        // Заполняем карточку данными
+        contactCard.querySelector(".profile-pic").src = contactData.image;
+        contactCard.querySelector(".name").textContent = contactData.name;
+        contactCard.querySelector(".username").textContent = contactData.username;
+        contactCard.querySelector(".description").textContent = contactData.description;
+
+        // Добавляем ссылки на социальные сети
+        contactCard.querySelector(".social-button.vk").href = contactData.socialLinks.vk;
+        contactCard.querySelector(".social-button.telegram").href = contactData.socialLinks.telegram;
+        contactCard.querySelector(".social-button.instagram").href = contactData.socialLinks.instagram;
+
+        // Вставляем карточку в контейнер
+        container.appendChild(contactCard);
+    </script>
+
+</body>
+</html>
